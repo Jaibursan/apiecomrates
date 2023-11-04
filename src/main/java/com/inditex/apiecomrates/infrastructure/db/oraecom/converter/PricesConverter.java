@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.inditex.apiecomrates.domain.model.Price;
-import com.inditex.apiecomrates.domain.model.Money;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.entity.PricesEntity;
+import com.inditex.apiecomrates.domain.model.Money;
 
 public class PricesConverter {
 

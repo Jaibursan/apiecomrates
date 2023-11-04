@@ -9,16 +9,16 @@ import lombok.Data;
 @AllArgsConstructor
 public class Price {
     
-    private final String productId;
+    private String productId;
 
-	private final String brandId;
+	private String brandId;
 
-    private final String priceList;
+    private String priceList;
 
-    private final Date startDate;
+    private Date startDate;
 
-    private final Date endDte;
+    private Date endDte;
 
-    private final Money price;
+    private Money price;
 
 }

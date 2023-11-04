@@ -20,17 +20,16 @@ public class PricesManagerImpl implements PricesManager {
 
     @Override
     public List<Price> execute(String productId, String priceList, Date startDate, Date endDate) {
-        // Lógica para probar los dos tipos de accesos, mediante función JPA y mediante @query
-        List<Price> result;
         long initTime = new Date().getTime();
+        System.out.println("[PricesManagerImpl][execute] Se lanza consulta de lista de tarifas con filtros a la base de datos");
+        List<Price> result;
+        // Lógica para probar los dos tipos de accesos, mediante función JPA y mediante @query
         if (productId == null && priceList == null && startDate == null && endDate == null) {
-            System.out.println("[PricesManagerImpl] Se lanza consulta sin filtros a la base de datos");
             result = pricesConverter.convert(pricesRepository.findAll());
         } else {
-            System.out.println("[PricesManagerImpl] Se lanza consulta con filtros a la base de datos");
             result = pricesConverter.convert(pricesRepository.findAllWithFilters(productId, priceList, startDate, endDate));
         }
-        System.out.println("[PricesManagerImpl] Consulta completada ("+ (new Date().getTime() - initTime) + " ms)");
+        System.out.println("[PricesManagerImpl][execute] Consulta completada ("+ (new Date().getTime() - initTime) + " ms)");
         return result;
 	}
 

@@ -16,19 +16,19 @@ public class PricesService {
     private PricesManager pricesManager;
     
     public List<Price> getPrices(String productId, String priceList, Date startDate, Date endDate) {
-        System.out.println("[PricesService] INICIO");
+        System.out.println("[PricesService][getPrices] INICIO");
         String params = "";
         if (productId != null) params += "productId = " + productId + ", ";
         if (priceList != null) params += "priceList = " + priceList + ", ";
         if (startDate != null) params += "startDate = " + startDate + ", ";
         if (endDate != null) params += "endate = " + endDate + ", ";
         params = (params == "") ? "No hay parámetros de entrada" : params.substring(0, params.length() - 2);
-        System.out.println("[PricesService] Parámetros de entrada: " + params);
+        System.out.println("[PricesService][getPrices] Parámetros de entrada: " + params);
         
         List<Price> response = pricesManager.execute(productId, priceList, startDate, endDate);
 
-        System.out.println("[PricesService] Se han encontrado " + (response != null ? response.size() : 0) + " resultados");
-        System.out.println("[PricesService] FIN");
+        System.out.println("[PricesService][getPrices] Se han encontrado " + (response != null ? response.size() : 0) + " resultados");
+        System.out.println("[PricesService][getPrices] FIN");
         return response; 
     }
 }

@@ -27,7 +27,7 @@ public class PricesController {
         @RequestParam(name = "endDate", required = false) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date endDate
     ) {
         System.out.println("-----------------------------------------------------------------------");
-        System.out.println("[PricesController] Recibida nueva petición GET /prices");
+        System.out.println("[PricesController][getPrices] Recibida nueva petición GET /prices");
         List<Price> response = pricesService.getPrices(productId, priceList, startDate, endDate);
         System.out.println("-----------------------------------------------------------------------");
         return response;

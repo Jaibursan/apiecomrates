@@ -24,4 +24,13 @@ public class BrandsEntity {
 	@Column(name = "BRAND_NAME")
 	private String brandName;
 
+	@Column(name = "NIF")
+	private String nif;
+	
+	@Column(name = "ADDRESS")
+	private String address;
+
+	@Column(name = "CNAE_CODE")
+	private String cnaeCode;
+
 }

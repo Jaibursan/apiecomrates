@@ -21,5 +21,6 @@ public class PricesIdEntity implements Serializable {
 	
 	@Column(name = "PRICE_LIST")
 	private String priceList;
+	
 
 }
