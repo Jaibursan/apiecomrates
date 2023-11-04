@@ -21,14 +21,23 @@ public class PricesController {
 
     @RequestMapping(value = "/prices", method = RequestMethod.GET)
     public List<Price> getPrices(
-        @RequestParam(name = "productId", required = false) String productId,
-        @RequestParam(name = "priceList", required = false) String priceList,
-        @RequestParam(name = "startDate", required = false) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date startDate,
-        @RequestParam(name = "endDate", required = false) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date endDate
     ) {
         System.out.println("-----------------------------------------------------------------------");
         System.out.println("[PricesController][getPrices] Recibida nueva petición GET /prices");
-        List<Price> response = pricesService.getPrices(productId, priceList, startDate, endDate);
+        List<Price> response = pricesService.getPrices();
+        System.out.println("-----------------------------------------------------------------------");
+        return response;
+    }
+
+    @RequestMapping(value = "/prices/pricetoapply", method = RequestMethod.GET)
+    public Price getPricesPriceToApply(
+        @RequestParam(name = "productId", required = false) String productId,
+        @RequestParam(name = "priceList", required = false) String priceList,
+        @RequestParam(name = "date", required = false) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date
+    ) {
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("[PricesController][getPricesPriceToApply] Recibida nueva petición GET /prices/priceToApply");
+        Price response = pricesService.getPricesPriceToApply(productId, priceList, date);
         System.out.println("-----------------------------------------------------------------------");
         return response;
     }

@@ -19,16 +19,19 @@ public class PricesManagerImpl implements PricesManager {
     private PricesConverter pricesConverter;
 
     @Override
-    public List<Price> execute(String productId, String priceList, Date startDate, Date endDate) {
+    public List<Price> execute() {
         long initTime = new Date().getTime();
-        System.out.println("[PricesManagerImpl][execute] Se lanza consulta de lista de tarifas con filtros a la base de datos");
-        List<Price> result;
-        // Lógica para probar los dos tipos de accesos, mediante función JPA y mediante @query
-        if (productId == null && priceList == null && startDate == null && endDate == null) {
-            result = pricesConverter.convert(pricesRepository.findAll());
-        } else {
-            result = pricesConverter.convert(pricesRepository.findAllWithFilters(productId, priceList, startDate, endDate));
-        }
+        System.out.println("[PricesManagerImpl][execute] Se lanza consulta de lista de tarifas a la base de datos");
+        List<Price> result = pricesConverter.convert(pricesRepository.findAll());
+        System.out.println("[PricesManagerImpl][execute] Consulta completada ("+ (new Date().getTime() - initTime) + " ms)");
+        return result;
+	}
+
+    @Override
+    public Price execute(String productId, String priceList, Date date) {
+        long initTime = new Date().getTime();
+        System.out.println("[PricesManagerImpl][execute] Se lanza consulta de tarifa a aplicar según filtros a la base de datos");
+        Price result = pricesConverter.convert(pricesRepository.findFirstByProductPricelistAndDate(productId, priceList, date));
         System.out.println("[PricesManagerImpl][execute] Consulta completada ("+ (new Date().getTime() - initTime) + " ms)");
         return result;
 	}

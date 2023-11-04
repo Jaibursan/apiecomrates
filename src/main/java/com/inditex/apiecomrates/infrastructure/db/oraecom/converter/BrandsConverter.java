@@ -23,13 +23,13 @@ public class BrandsConverter {
 
     public Brand convert(Optional<BrandsEntity> source) {
         if (source.isPresent()) {
-            BrandsEntity brandEntity = source.get();
+            BrandsEntity brandsEntity = source.get();
             return new Brand(
-                brandEntity.getBrandId(),
-                brandEntity.getBrandName(),
-                brandEntity.getNif(),
-                brandEntity.getAddress(),
-                brandEntity.getCnaeCode()
+                brandsEntity.getBrandId(),
+                brandsEntity.getBrandName(),
+                brandsEntity.getNif(),
+                brandsEntity.getAddress(),
+                brandsEntity.getCnaeCode()
             );
         }
         return null;
