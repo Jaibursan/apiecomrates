@@ -1,22 +1,27 @@
 # apiecomrates
 
+## Descripción
+
 Microservicio con las funcionalidades relacionadas con las tarifas de e-commerce.
 Está estructurado en capas o paquetes y dentro de cada capa los archivos están separados por funcionalidades, según estén relacionadas con precios/tarifas o con marcas/cadenas.
 
 El microservicio utiliza una base de datos H2 cargada en memoria al arrancar el servidor.
 
+
+## Estructura
+
 Las capas del microservicio son:
 
-- api: Controladores y servicios que reciben las peticiones REST.
+- api: Capa con los controladores y servicios que reciben las peticiones REST.
     - controller: Controladores que reciben las peticiones http.
     - service: Servicios utilizados por los controladores con las funciones asignadas a cada endpoint.
     - model: Modelos de datos que corresponden a los objetos de solicitud y respuesta de los endpoints del API. (No se utilizan en este proyecto porque se han utilizado los propios modelos del dominio) 
     - converter: Clases conversoras de los modelos de datos internos del dominio a los objetos de solicitud y respuesta de los endpoints. (No se utilizan en este proyecto porque se han utilizado los propios modelos del dominio) 
 
-- application: Interfaces con las declaraciones de los métodos que ejecutan toda la la lógica de negocio.
+- application: Capa que contiene la lógica de negocio.
     - bussines: Clases manejadoras y métodos que implementan la lógica de negocio.
 
-- domain: Paquete para la implementación del dominio
+- domain: Capa para la implementación del dominio
     - model: Modelos de datos del dominio que dan soporte a la lógica del negocio y a la transferencia de información.
 
 - infrastructure: Capa de conectores a sistemas externos (bases de datos, transacciones, webservices... En esta aplicación únicamente se utiliza conexión a una base de datos en memoria H2)
@@ -25,7 +30,10 @@ Las capas del microservicio son:
         - repository: Paquete que contendrá las interfaces con la definición de las consultas y ejecución de procedimientos almacenados propios del datasource.
         - converter: Clases conversoras de las entidades a los modelos de datos del dominio de la aplicación.
 
-- config: Clase que incluye y añade los beans necesarios al contexto Spring para la correcta ejecución de la aplicación.
+- config: Capa de configuración que añade los beans necesarios al contexto Spring para la correcta ejecución de la aplicación.
+
+- exceptions: Capa de excepciones personalizadas.
+
 
 ## Endpoints precios/tarifas
 
@@ -44,7 +52,7 @@ Las capas del microservicio son:
                     - money: number. Cantidad
                     - currency: string. Código de divisa según ISO-4217
 
-- /pricestoapply 
+- /prices/pricestoapply 
     - GET
         - Descripción: Tarifa a aplicar para los filtros indicados
         - Tablas utilizadas: PRICES
@@ -62,7 +70,8 @@ Las capas del microservicio son:
                 - price: Precio final a aplicar. El objeto Money contiene los siguientes campos: 
                     - money: number. Cantidad
                     - currency: string. Código de divisa según ISO-4217
-                
+
+
 ## Endpoints marcas/cadenas
 
 - /brands 
@@ -87,3 +96,16 @@ Las capas del microservicio son:
                 - nif: string. NIF de la marca/cadena.
                 - address: string. Dirección fiscal de la marca/cadena.
                 - cnae_code: string. Código de actividad CNAE de la marca/cadena.
+
+
+## Tests
+
+Se han realizado los siguientes tests sobre el endpoint /prices/pricestoapply:
+
+- Test 1: petición a las 10:00 del día 14 del producto 35455 para la brand 1 (ZARA)
+- Test 2: petición a las 16:00 del día 14 del producto 35455 para la brand 1 (ZARA)
+- Test 3: petición a las 21:00 del día 14 del producto 35455 para la brand 1 (ZARA)
+- Test 4: petición a las 10:00 del día 15 del producto 35455 para la brand 1 (ZARA)
+- Test 5: petición a las 21:00 del día 16 del producto 35455 para la brand 1 (ZARA)
+- Test de error 400 por formato de fecha
+- Test de error 404 Not Found
