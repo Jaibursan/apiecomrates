@@ -2,7 +2,6 @@ package com.inditex.apiecomrates.infrastructure.db.oraecom.converter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.inditex.apiecomrates.domain.model.Price;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.entity.PricesEntity;
@@ -45,18 +44,17 @@ public class PricesConverter {
      * @param source Object PricesEntity
      * @return Object Price
      */
-    public Price convert(Optional<PricesEntity> source) {
-        if (source.isPresent()) {
-            PricesEntity pricesEntity = source.get();
+    public Price convert(PricesEntity source) {
+        if (source != null) {
             return new Price(
-                pricesEntity.getPricesIdEntity().getProductId(),
-                pricesEntity.getPricesIdEntity().getBrandsEntity().getBrandId(),
-                pricesEntity.getPricesIdEntity().getPriceList(),
-                pricesEntity.getStartDate(),
-                pricesEntity.getEndDate(),
+                source.getPricesIdEntity().getProductId(),
+                source.getPricesIdEntity().getBrandsEntity().getBrandId(),
+                source.getPricesIdEntity().getPriceList(),
+                source.getStartDate(),
+                source.getEndDate(),
                 new Money(
-                    pricesEntity.getPrice(),
-                    pricesEntity.getCurr()
+                    source.getPrice(),
+                    source.getCurr()
                 )
             );
         }

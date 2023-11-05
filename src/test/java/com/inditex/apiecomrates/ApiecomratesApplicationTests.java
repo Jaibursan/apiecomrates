@@ -141,4 +141,46 @@ class ApiecomratesApplicationTests {
 		.andExpect(MockMvcResultMatchers.jsonPath("$.priceList").value("4"))
 		.andExpect(MockMvcResultMatchers.jsonPath("$.price.amount").isNotEmpty());
 	}
+
+	/*
+	 * Test date format for getPricesPricetoapply().
+	 * This test receives brandId = 1, productId = 35455 and date = 2020-06-1aaaaaaaaaaa.
+	 * This test checks that the service returns HTTP status bad request because date is not valid
+	 */
+	@Test
+	void getPricesPricetoapplyDateFormatTest() throws Exception {
+
+		String brandId = "1";
+		String productId = "35455";
+		String date = "2020-06-1aaaaaaaaaaa";
+
+		mockMvc.perform(get("/prices/pricetoapply")
+			.param("brandId", brandId)
+			.param("productId", productId)
+			.param("date", date)               
+		)
+		.andDo(print())
+		.andExpect(status().isBadRequest());
+	}
+
+	/*
+	 * Test no results for getPricesPricetoapply().
+	 * This test receives brandId = 1, productId = 35455 and date = 2022-06-16 00:00:00.
+	 * This test checks that the service returns HTTP status not found because there are no results
+	 */
+	@Test
+	void getPricesPricetoapplyNotFoundTest() throws Exception {
+
+		String brandId = "1";
+		String productId = "35455";
+		String date = "2022-06-16 00:00:00";
+
+		mockMvc.perform(get("/prices/pricetoapply")
+			.param("brandId", brandId)
+			.param("productId", productId)
+			.param("date", date)               
+		)
+		.andDo(print())
+		.andExpect(status().isNotFound());
+	}
 }

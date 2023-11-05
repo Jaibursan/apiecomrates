@@ -2,12 +2,15 @@ package com.inditex.apiecomrates.application.bussiness;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.inditex.apiecomrates.application.PricesManager;
 import com.inditex.apiecomrates.domain.model.Price;
+import com.inditex.apiecomrates.exceptions.NoSuchElementFoundException;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.converter.PricesConverter;
+import com.inditex.apiecomrates.infrastructure.db.oraecom.entity.PricesEntity;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.repository.PricesRepository;
 
 /**
@@ -48,7 +51,11 @@ public class PricesManagerImpl implements PricesManager {
     public Price execute(String brandId, String productId, Date date) {
         long initTime = new Date().getTime();
         System.out.println("[PricesManagerImpl][execute] Se lanza consulta de tarifa a aplicar según filtros a la base de datos");
-        Price result = pricesConverter.convert(pricesRepository.findFirstByProductPricelistAndDate(brandId, productId, date));
+        Optional<PricesEntity> optionalPricesEntity = pricesRepository.findFirstByProductPricelistAndDate(brandId, productId, date);
+        if (!optionalPricesEntity.isPresent()) {
+            throw new NoSuchElementFoundException("No se ha encontrado ninguna tarifa para el filtro indicado");
+        }
+        Price result = pricesConverter.convert(optionalPricesEntity.get());
         System.out.println("[PricesManagerImpl][execute] Consulta completada ("+ (new Date().getTime() - initTime) + " ms)");
         return result;
 	}
