@@ -8,6 +8,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
+/**
+ * PricesIdEntity
+ * DAO for price unique primary key
+ */
 @Embeddable
 @Data
 public class PricesIdEntity implements Serializable {

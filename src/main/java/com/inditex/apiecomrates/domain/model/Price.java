@@ -5,6 +5,10 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Price
+ * DTO for price
+ */
 @Data
 @AllArgsConstructor
 public class Price {

@@ -9,6 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+/**
+ * PricesEntity
+ * DAO for price
+ */
 @Entity
 @Table(name = "PRICES")
 @Data

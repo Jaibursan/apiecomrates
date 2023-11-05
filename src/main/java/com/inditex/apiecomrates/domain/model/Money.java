@@ -5,6 +5,10 @@ import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Money
+ * DTO for money
+ */
 @Data
 @AllArgsConstructor
 public class Money {

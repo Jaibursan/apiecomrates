@@ -10,6 +10,10 @@ import com.inditex.apiecomrates.domain.model.Brand;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.converter.BrandsConverter;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.repository.BrandsRepository;
 
+/**
+ * BrandsManagerImpl
+ * This class contains the implementation of methods that execute the business logic related to brands
+ */
 public class BrandsManagerImpl implements BrandsManager {
     
     @Autowired
@@ -18,6 +22,11 @@ public class BrandsManagerImpl implements BrandsManager {
     @Autowired
     private BrandsConverter brandsConverter;
 
+    /**
+     * execute
+     * This method is used to get all brands
+     * @return List of brands
+     */
     @Override
     public List<Brand> execute() {
         long initTime = new Date().getTime();
@@ -27,6 +36,12 @@ public class BrandsManagerImpl implements BrandsManager {
         return result;
 	}
 
+    /**
+     * execute
+     * This method is used to get the brand detail, searching by id
+     * @param brandId
+     * @return Brand detail
+     */
     @Override
     public Brand execute(String brandId) {
         long initTime = new Date().getTime();

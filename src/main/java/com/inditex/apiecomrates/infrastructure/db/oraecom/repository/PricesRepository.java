@@ -17,7 +17,7 @@ public interface PricesRepository extends JpaRepository<PricesEntity, PricesIdEn
     public List<PricesEntity> findAll();
     
     @Query(
-        value = "SELECT * FROM PRICES WHERE (?1 IS NULL OR PRODUCT_ID = ?1) AND (?2 IS NULL OR PRICE_LIST = ?2) AND (?3 IS NULL OR ?3 BETWEEN START_DATE AND END_DATE) ORDER BY PRIORITY DESC LIMIT 1", 
+        value = "SELECT * FROM PRICES WHERE (?1 IS NULL OR BRAND_ID = ?1) AND (?2 IS NULL OR PRODUCT_ID = ?2) AND (?3 IS NULL OR ?3 BETWEEN START_DATE AND END_DATE) ORDER BY PRIORITY DESC LIMIT 1", 
         nativeQuery = true)
-    public Optional<PricesEntity> findFirstByProductPricelistAndDate(String productId, String priceList, Date date);
+    public Optional<PricesEntity> findFirstByProductPricelistAndDate(String brandId, String productId, Date date);
 }

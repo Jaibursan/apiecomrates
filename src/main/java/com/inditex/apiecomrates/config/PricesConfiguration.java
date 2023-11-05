@@ -8,6 +8,10 @@ import com.inditex.apiecomrates.application.bussiness.PricesManagerImpl;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.converter.PricesConverter;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.repository.PricesRepository;
 
+/**
+ * PricesConfiguration
+ * This class contains the beans used to process requests related to prices
+ */
 @Configuration
 public class PricesConfiguration {
 

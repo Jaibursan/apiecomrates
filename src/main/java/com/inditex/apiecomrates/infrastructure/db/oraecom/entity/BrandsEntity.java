@@ -9,6 +9,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * BrandsEntity
+ * DAO for brand
+ */
 @Entity
 @Table(name = "BRANDS")
 @Getter

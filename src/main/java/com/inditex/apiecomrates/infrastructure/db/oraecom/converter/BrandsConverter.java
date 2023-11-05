@@ -7,8 +7,18 @@ import java.util.Optional;
 import com.inditex.apiecomrates.domain.model.Brand;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.entity.BrandsEntity;
 
+/**
+ * BrandsConverter
+ * This class contains the logic to convert from DAO objects to DTO objects related to brands
+ */
 public class BrandsConverter {
 
+    /**
+     * convert
+     * This method converts a list of BrandsEntity to a list of Brands
+     * @param source List of BrandsEntity
+     * @return List of Brand
+     */
     public List<Brand> convert(List<BrandsEntity> source) {
         
         List<Brand> listBrand = new ArrayList<Brand>();
@@ -21,6 +31,12 @@ public class BrandsConverter {
         return listBrand;
     }
 
+    /**
+     * convert
+     * This method converts a BrandsEntity to a Brand
+     * @param source Object BrandsEntity
+     * @return Object Brand
+     */
     public Brand convert(Optional<BrandsEntity> source) {
         if (source.isPresent()) {
             BrandsEntity brandsEntity = source.get();

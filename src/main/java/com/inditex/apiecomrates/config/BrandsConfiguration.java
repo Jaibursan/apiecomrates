@@ -8,6 +8,10 @@ import com.inditex.apiecomrates.application.bussiness.BrandsManagerImpl;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.converter.BrandsConverter;
 import com.inditex.apiecomrates.infrastructure.db.oraecom.repository.BrandsRepository;
 
+/**
+ * BrandsConfiguration
+ * This class contains the beans used to process requests related to brands
+ */
 @Configuration
 public class BrandsConfiguration {
 

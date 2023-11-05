@@ -9,12 +9,21 @@ import org.springframework.stereotype.Service;
 import com.inditex.apiecomrates.application.PricesManager;
 import com.inditex.apiecomrates.domain.model.Price;
 
+/**
+ * PricesService
+ * This class is the service used to process requests related to prices
+ */ 
 @Service
 public class PricesService {
     
     @Autowired
     private PricesManager pricesManager;
     
+    /**
+     *  getPrices
+     *  This method is used to get all prices
+     *  @return List of prices
+     */
     public List<Price> getPrices() {
         System.out.println("[PricesService][getPrices] INICIO");
         List<Price> response = pricesManager.execute();
@@ -23,15 +32,23 @@ public class PricesService {
         return response; 
     }
 
-    public Price getPricesPriceToApply(String productId, String priceList, Date date) {
+    /**
+     * getPricesPricetoapply
+     * This method is used to get the price to apply
+     * @param brandId
+     * @param productId
+     * @param date
+     * @return Price to apply
+     */
+    public Price getPricesPricetoapply(String brandId, String productId, Date date) {
         System.out.println("[PricesService][getPricesPriceToApply] INICIO");
         String params = "";
+        if (brandId != null) params += "brandId = " + brandId + ", ";
         if (productId != null) params += "productId = " + productId + ", ";
-        if (priceList != null) params += "priceList = " + priceList + ", ";
         if (date != null) params += "date = " + date + ", ";
         params = (params == "") ? "No hay parámetros de entrada" : params.substring(0, params.length() - 2);
         System.out.println("[PricesService][getPricesPriceToApply] Parámetros de entrada: " + params);
-        Price response = pricesManager.execute(productId, priceList, date);
+        Price response = pricesManager.execute(brandId, productId, date);
         System.out.println("[PricesService][getPricesPriceToApply] " + ((response != null) ? "Tarifa encontrada" : "No se ha encontrado ninguna tarifa"));
         System.out.println("[PricesService][getPricesPriceToApply] FIN");
         return response; 
